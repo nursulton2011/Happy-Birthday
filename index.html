@@ -109,5 +109,14 @@
         }
       }
     </script>
+    <script>
+      document.addEventListener("click", function playOnce() {
+        let song = document.getElementById("song");
+        song
+          .play()
+          .catch((error) => console.log("Автовоспроизведение заблокировано"));
+        document.removeEventListener("click", playOnce);
+      });
+    </script>
   </body>
 </html>
