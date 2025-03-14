@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Happy Birthday!</title>
+    <style>
+      body {
+        text-align: center;
+        font-family: Arial, sans-serif;
+        background-color: #ffccff;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+      }
+      .cake {
+        position: relative;
+        width: 200px;
+        height: 200px;
+        background: white;
+        border-radius: 50%;
+        box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .candle {
+        position: absolute;
+        width: 12px;
+        height: 50px;
+        background: red;
+        border-radius: 5px;
+      }
+      .flame {
+        width: 15px;
+        height: 25px;
+        background: orange;
+        border-radius: 50%;
+        position: absolute;
+        top: -25px;
+        left: 50%;
+        transform: translateX(-50%);
+        animation: flicker 0.5s infinite alternate;
+      }
+      @keyframes flicker {
+        0% {
+          opacity: 1;
+          transform: scale(1);
+        }
+        100% {
+          opacity: 0.7;
+          transform: scale(1.1);
+        }
+      }
+      .hidden {
+        display: none;
+      }
+      #message {
+        font-size: 24px;
+        font-weight: bold;
+        color: #ff4081;
+      }
+      @media (max-width: 400px) {
+        .cake {
+          width: 150px;
+          height: 150px;
+        }
+        .candle {
+          width: 8px;
+          height: 30px;
+        }
+        .flame {
+          width: 10px;
+          height: 15px;
+          top: -15px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h1>🎂 Happy Birthday! 🎂</h1>
+    <div class="cake">
+      <script>
+        for (let i = 0; i < 7; i++) {
+          let angle = (i / 7) * (2 * Math.PI);
+          let x = 80 * Math.cos(angle);
+          let y = 80 * Math.sin(angle);
+          document.write(
+            `<div class="candle" onclick="blowOut(this)" style="left: calc(50% + ${x}px); top: calc(50% + ${y}px); transform: translate(-50%, -50%);"><div class="flame"></div></div>`
+          );
+        }
+      </script>
+    </div>
+    <p id="message" class="hidden">🎉 С Днём Рождения! 🎉</p>
+    <audio
+      id="song"
+      src="https://www.fesliyanstudios.com/play-mp3/387"
+      autoplay
+      loop
+    ></audio>
+    <script>
+      function blowOut(candle) {
+        candle.querySelector(".flame").classList.add("hidden");
+        if (document.querySelectorAll(".flame:not(.hidden)").length === 0) {
+          document.getElementById("message").classList.remove("hidden");
+        }
+      }
+    </script>
+  </body>
+</html>
